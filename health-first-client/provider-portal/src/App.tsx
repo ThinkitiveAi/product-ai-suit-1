@@ -39,6 +39,7 @@ import ProviderLabOrders from "./components/provider/LabOrders";
 import ProviderBilling from "./components/provider/Billing";
 import ProviderMessages from "./components/provider/Messages";
 import ProviderSettings from "./components/provider/Settings";
+import DayWiseAvailability from "./components/provider/DayWiseAvailability";
 
 // Protected Route Component
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -146,10 +147,7 @@ function App() {
                 </AuthLayout>
               }
             />
-            <Route
-              path="/provider-signin"
-              element={<ProviderSignIn />}
-            />
+            <Route path="/provider-signin" element={<ProviderSignIn />} />
 
             {/* Patient Portal Routes */}
             <Route
@@ -191,6 +189,7 @@ function App() {
               <Route path="billing" element={<ProviderBilling />} />
               <Route path="messages" element={<ProviderMessages />} />
               <Route path="settings" element={<ProviderSettings />} />
+              <Route path="availability" element={<DayWiseAvailability />} />
             </Route>
 
             {/* Catch all route */}
