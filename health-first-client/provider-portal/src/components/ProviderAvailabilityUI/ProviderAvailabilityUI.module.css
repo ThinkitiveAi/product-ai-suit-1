@@ -1,0 +1,464 @@
+/* Main Container */
+.container {
+  @apply min-h-screen bg-gray-50;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Header */
+.header {
+  @apply bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.headerLeft {
+  @apply flex items-center space-x-6;
+}
+
+.title {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.providerSelector {
+  @apply flex items-center space-x-2;
+}
+
+.providerIcon {
+  @apply w-5 h-5 text-blue-600;
+}
+
+.providerSelect {
+  @apply px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply bg-white text-gray-900 text-sm font-medium;
+}
+
+.headerRight {
+  @apply flex items-center space-x-3;
+}
+
+.addButton {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  @apply transition-colors duration-200 flex items-center space-x-2;
+}
+
+.addIcon {
+  @apply w-4 h-4;
+}
+
+.templateButton {
+  @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  @apply transition-colors duration-200 flex items-center space-x-2;
+}
+
+.templateIcon {
+  @apply w-4 h-4;
+}
+
+.bulkButton {
+  @apply bg-orange-600 text-white px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2;
+  @apply transition-colors duration-200;
+}
+
+/* Calendar Container */
+.calendarContainer {
+  @apply flex h-[calc(100vh-120px)];
+}
+
+.calendarContent {
+  @apply flex-1 bg-white p-6 overflow-auto;
+}
+
+/* Sidebar */
+.sidebar {
+  @apply w-80 bg-white border-l border-gray-200 p-6 overflow-y-auto;
+}
+
+.sidebarSection {
+  @apply mb-6;
+}
+
+.sidebarTitle {
+  @apply text-lg font-semibold text-gray-900 mb-3;
+}
+
+.statsGrid {
+  @apply grid grid-cols-1 gap-3;
+}
+
+.statItem {
+  @apply flex items-center space-x-3 p-3 bg-gray-50 rounded-lg;
+}
+
+.statIcon {
+  @apply w-5 h-5 text-blue-600;
+}
+
+.statValue {
+  @apply text-xl font-bold text-gray-900;
+}
+
+.statLabel {
+  @apply text-sm text-gray-600;
+}
+
+.resolveButton {
+  @apply w-full bg-red-600 text-white px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  @apply transition-colors duration-200;
+}
+
+.noSelection {
+  @apply text-gray-500 text-sm italic;
+}
+
+.selectedSlots {
+  @apply space-y-2;
+}
+
+.selectedSlot {
+  @apply flex items-center justify-between p-2 bg-blue-50 rounded border border-blue-200;
+}
+
+.slotTime {
+  @apply text-sm font-medium text-blue-900;
+}
+
+.removeSlot {
+  @apply p-1 text-blue-600 hover:text-blue-800 hover:bg-blue-100 rounded;
+  @apply transition-colors duration-200;
+}
+
+.removeIcon {
+  @apply w-4 h-4;
+}
+
+/* Calendar Views */
+.calendarGrid {
+  @apply grid gap-1;
+}
+
+.calendarCell {
+  @apply border border-gray-200 bg-white p-2 min-h-[80px];
+  @apply hover:bg-gray-50 transition-colors duration-200;
+}
+
+.calendarCellHeader {
+  @apply text-xs font-medium text-gray-500 mb-1;
+}
+
+.calendarCellContent {
+  @apply space-y-1;
+}
+
+/* Time Slots */
+.timeSlot {
+  @apply p-2 rounded text-xs font-medium cursor-pointer;
+  @apply transition-all duration-200;
+}
+
+.timeSlotAvailable {
+  @apply bg-green-100 text-green-800 border border-green-200;
+  @apply hover:bg-green-200;
+}
+
+.timeSlotBooked {
+  @apply bg-red-100 text-red-800 border border-red-200;
+  @apply cursor-not-allowed;
+}
+
+.timeSlotSelected {
+  @apply bg-blue-100 text-blue-800 border border-blue-300;
+  @apply ring-2 ring-blue-500;
+}
+
+.timeSlotConflict {
+  @apply bg-orange-100 text-orange-800 border border-orange-200;
+  @apply ring-2 ring-orange-500;
+}
+
+/* Week View */
+.weekView {
+  @apply grid grid-cols-8 gap-1;
+}
+
+.weekHeader {
+  @apply bg-gray-100 p-3 text-center font-medium text-gray-700;
+}
+
+.weekTimeColumn {
+  @apply bg-gray-50 p-2 text-xs text-gray-500 font-medium;
+}
+
+.weekTimeSlot {
+  @apply h-12 border-b border-gray-100 relative;
+}
+
+/* Day View */
+.dayView {
+  @apply grid grid-cols-1 gap-1;
+}
+
+.dayTimeSlot {
+  @apply h-16 border border-gray-200 p-2 relative;
+  @apply hover:bg-gray-50 transition-colors duration-200;
+}
+
+.dayTimeLabel {
+  @apply text-xs text-gray-500 font-medium;
+}
+
+.dayTimeContent {
+  @apply mt-1;
+}
+
+/* Month View */
+.monthView {
+  @apply grid grid-cols-7 gap-1;
+}
+
+.monthHeader {
+  @apply bg-gray-100 p-3 text-center font-medium text-gray-700;
+}
+
+.monthCell {
+  @apply min-h-[120px] border border-gray-200 p-2;
+  @apply hover:bg-gray-50 transition-colors duration-200;
+}
+
+.monthCellHeader {
+  @apply text-sm font-medium text-gray-900 mb-2;
+}
+
+.monthCellContent {
+  @apply space-y-1;
+}
+
+/* Navigation */
+.navigation {
+  @apply bg-white border-b border-gray-200 px-6 py-4;
+}
+
+.navigationContent {
+  @apply flex items-center justify-between;
+}
+
+.navigationLeft {
+  @apply flex items-center space-x-4;
+}
+
+.navigationRight {
+  @apply flex items-center space-x-2;
+}
+
+.navButton {
+  @apply p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded;
+  @apply transition-colors duration-200;
+}
+
+.navButtonActive {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.viewSwitcher {
+  @apply flex bg-gray-100 rounded-lg p-1;
+}
+
+.viewButton {
+  @apply px-3 py-1 text-sm font-medium rounded;
+  @apply transition-colors duration-200;
+}
+
+.viewButtonActive {
+  @apply bg-white text-blue-700 shadow-sm;
+}
+
+.viewButtonInactive {
+  @apply text-gray-600 hover:text-gray-900;
+}
+
+/* Conflict Indicators */
+.conflictIndicator {
+  @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.conflictHigh {
+  @apply bg-red-100 text-red-800;
+}
+
+.conflictMedium {
+  @apply bg-orange-100 text-orange-800;
+}
+
+.conflictLow {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+/* Modal Overlays */
+.modalOverlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modalContent {
+  @apply bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto;
+}
+
+.modalHeader {
+  @apply px-6 py-4 border-b border-gray-200 flex items-center justify-between;
+}
+
+.modalTitle {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.modalClose {
+  @apply p-2 text-gray-400 hover:text-gray-600 rounded;
+  @apply transition-colors duration-200;
+}
+
+.modalBody {
+  @apply px-6 py-4;
+}
+
+.modalFooter {
+  @apply px-6 py-4 border-t border-gray-200 flex items-center justify-end space-x-3;
+}
+
+/* Form Elements */
+.formGroup {
+  @apply mb-4;
+}
+
+.formLabel {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+.formInput {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-200;
+}
+
+.formSelect {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-200;
+}
+
+.formCheckbox {
+  @apply h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded;
+}
+
+/* Buttons */
+.btnPrimary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  @apply transition-colors duration-200;
+}
+
+.btnSecondary {
+  @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  @apply transition-colors duration-200;
+}
+
+.btnDanger {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg font-medium;
+  @apply hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  @apply transition-colors duration-200;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sidebar {
+    @apply w-64;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    @apply flex-col space-y-4;
+  }
+  
+  .headerLeft {
+    @apply w-full justify-between;
+  }
+  
+  .headerRight {
+    @apply w-full justify-center;
+  }
+  
+  .calendarContainer {
+    @apply flex-col;
+  }
+  
+  .sidebar {
+    @apply w-full border-l-0 border-t;
+  }
+  
+  .calendarContent {
+    @apply p-4;
+  }
+}
+
+/* Loading States */
+.loading {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Empty States */
+.emptyState {
+  @apply text-center py-12;
+}
+
+.emptyStateIcon {
+  @apply w-12 h-12 text-gray-400 mx-auto mb-4;
+}
+
+.emptyStateTitle {
+  @apply text-lg font-medium text-gray-900 mb-2;
+}
+
+.emptyStateDescription {
+  @apply text-gray-600;
+}
+
+/* Success States */
+.success {
+  @apply bg-green-50 border border-green-200 rounded-lg p-4;
+}
+
+.successIcon {
+  @apply w-5 h-5 text-green-600;
+}
+
+.successText {
+  @apply text-green-800 font-medium;
+}
+
+/* Error States */
+.error {
+  @apply bg-red-50 border border-red-200 rounded-lg p-4;
+}
+
+.errorIcon {
+  @apply w-5 h-5 text-red-600;
+}
+
+.errorText {
+  @apply text-red-800 font-medium;
+}
+
+/* Warning States */
+.warning {
+  @apply bg-yellow-50 border border-yellow-200 rounded-lg p-4;
+}
+
+.warningIcon {
+  @apply w-5 h-5 text-yellow-600;
+}
+
+.warningText {
+  @apply text-yellow-800 font-medium;
+} 
