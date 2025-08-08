@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,50 +6,103 @@ import {
   CardContent,
   Button,
   Grid,
+  Tabs,
+  Tab,
 } from "@mui/material";
-import { Schedule, Event, Add } from "@mui/icons-material";
+import { Schedule, Event, Add, Settings } from "@mui/icons-material";
+import DayWiseAvailabilityModal from "./DayWiseAvailabilityModal";
+import BookAppointmentModal from "./BookAppointmentModal";
+import AvailabilityCalendar from "./AvailabilityCalendar";
 
 const ProviderSchedule: React.FC = () => {
+  const [isAvailabilityModalOpen, setIsAvailabilityModalOpen] = useState(false);
+  const [isBookAppointmentModalOpen, setIsBookAppointmentModalOpen] =
+    useState(false);
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleOpenAvailabilityModal = () => {
+    setIsAvailabilityModalOpen(true);
+  };
+
+  const handleCloseAvailabilityModal = () => {
+    setIsAvailabilityModalOpen(false);
+  };
+
+  const handleOpenBookAppointmentModal = () => {
+    setIsBookAppointmentModalOpen(true);
+  };
+
+  const handleCloseBookAppointmentModal = () => {
+    setIsBookAppointmentModalOpen(false);
+  };
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
+  const handleEditAvailability = () => {
+    setIsAvailabilityModalOpen(true);
+  };
+
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
         Schedule
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Calendar View
-              </Typography>
-              <Box
-                sx={{
-                  height: 400,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  bgcolor: "grey.100",
-                }}>
-                <Typography color="text.secondary">
-                  Calendar Component
+
+      {/* Tabs */}
+      <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
+        <Tabs value={activeTab} onChange={handleTabChange}>
+          <Tab label="Availability Calendar" />
+          <Tab label="Quick Actions" />
+        </Tabs>
+      </Box>
+
+      {/* Tab Content */}
+      {activeTab === 0 && (
+        <AvailabilityCalendar onEditAvailability={handleEditAvailability} />
+      )}
+
+      {activeTab === 1 && (
+        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+          <Box sx={{ flex: "1 1 600px" }}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Quick Actions
                 </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Quick Actions
-              </Typography>
-              <Button variant="outlined" fullWidth startIcon={<Add />}>
-                Set Availability
-              </Button>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  startIcon={<Add />}
+                  onClick={handleOpenBookAppointmentModal}
+                  sx={{ mb: 2 }}>
+                  Book Appointment
+                </Button>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  startIcon={<Settings />}
+                  onClick={handleOpenAvailabilityModal}>
+                  Set Availability
+                </Button>
+              </CardContent>
+            </Card>
+          </Box>
+        </Box>
+      )}
+
+      {/* Day Wise Availability Modal */}
+      <DayWiseAvailabilityModal
+        open={isAvailabilityModalOpen}
+        onClose={handleCloseAvailabilityModal}
+      />
+
+      {/* Book Appointment Modal */}
+      <BookAppointmentModal
+        open={isBookAppointmentModalOpen}
+        onClose={handleCloseBookAppointmentModal}
+      />
     </Box>
   );
 };
