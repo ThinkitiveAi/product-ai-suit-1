@@ -92,7 +92,7 @@ const Login: React.FC = () => {
       sx={{
         minHeight: "100vh",
         display: "flex",
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        background: "white",
       }}>
       {/* Left Side - Login Form */}
       <Box
@@ -101,27 +101,38 @@ const Login: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: 4,
+          p: 6,
           backgroundColor: "white",
         }}>
-        <Box sx={{ width: "100%", maxWidth: 400 }}>
+        <Box sx={{ width: "100%", maxWidth: 450 }}>
           {/* Logo */}
-          <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
-            <Favorite sx={{ color: "#1976d2", fontSize: 32, mr: 1 }} />
+          <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
+            <Favorite sx={{ color: "#1976d2", fontSize: 36, mr: 2 }} />
             <Typography
-              variant="h4"
-              sx={{ color: "#1976d2", fontWeight: "bold" }}>
-              eCarehealth
+              variant="h3"
+              sx={{
+                color: "#1976d2",
+                fontWeight: "bold",
+                letterSpacing: "-0.5px",
+              }}>
+              Welcome to EHR System
             </Typography>
           </Box>
 
           {/* Welcome Text */}
           <Typography
-            variant="h4"
-            sx={{ color: "#1976d2", fontWeight: "bold", mb: 1 }}>
+            variant="h3"
+            sx={{
+              color: "#1976d2",
+              fontWeight: "bold",
+              mb: 1,
+              letterSpacing: "-0.5px",
+            }}>
             Hey, good to see you
           </Typography>
-          <Typography variant="h6" sx={{ color: "#1976d2", mb: 4 }}>
+          <Typography
+            variant="h5"
+            sx={{ color: "#1976d2", mb: 5, opacity: 0.9 }}>
             Let's Sign in you
           </Typography>
 
@@ -140,7 +151,15 @@ const Login: React.FC = () => {
               defaultValue="dev_mt"
               error={!!errors.username}
               helperText={errors.username?.message}
-              sx={{ mb: 3 }}
+              sx={{
+                mb: 3,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#1976d2",
+                  },
+                },
+              }}
             />
 
             <TextField
@@ -152,7 +171,15 @@ const Login: React.FC = () => {
               defaultValue="rajkumar.rathod+mt@medarch.com"
               error={!!errors.email}
               helperText={errors.email?.message}
-              sx={{ mb: 3 }}
+              sx={{
+                mb: 3,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#1976d2",
+                  },
+                },
+              }}
             />
 
             <TextField
@@ -169,13 +196,22 @@ const Login: React.FC = () => {
                   <InputAdornment position="end">
                     <IconButton
                       onClick={handleTogglePasswordVisibility}
-                      edge="end">
+                      edge="end"
+                      sx={{ color: "#1976d2" }}>
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
               }}
-              sx={{ mb: 3 }}
+              sx={{
+                mb: 3,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 2,
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#1976d2",
+                  },
+                },
+              }}
             />
 
             <Box
@@ -183,19 +219,39 @@ const Login: React.FC = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                mb: 3,
+                mb: 4,
               }}>
               <FormControlLabel
                 control={
                   <Checkbox
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    sx={{ color: "#1976d2" }}
+                    sx={{
+                      color: "#1976d2",
+                      "&.Mui-checked": {
+                        color: "#1976d2",
+                      },
+                    }}
                   />
                 }
-                label="Remember Me"
+                label={
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "#1976d2", fontWeight: 500 }}>
+                    Remember Me
+                  </Typography>
+                }
               />
-              <Link href="#" sx={{ color: "#1976d2", textDecoration: "none" }}>
+              <Link
+                href="#"
+                sx={{
+                  color: "#1976d2",
+                  textDecoration: "none",
+                  fontWeight: 500,
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}>
                 Forgot Password?
               </Link>
             </Box>
@@ -206,11 +262,24 @@ const Login: React.FC = () => {
               variant="contained"
               disabled={isLoading || !isValid}
               sx={{
-                py: 1.5,
+                py: 2,
                 backgroundColor: "#1976d2",
+                borderRadius: 2,
+                fontSize: "1.1rem",
+                fontWeight: "bold",
+                textTransform: "none",
+                boxShadow: "0 4px 12px rgba(25, 118, 210, 0.3)",
                 "&:hover": {
                   backgroundColor: "#1565c0",
+                  boxShadow: "0 6px 16px rgba(25, 118, 210, 0.4)",
+                  transform: "translateY(-1px)",
                 },
+                "&:disabled": {
+                  backgroundColor: "#ccc",
+                  boxShadow: "none",
+                  transform: "none",
+                },
+                transition: "all 0.2s ease-in-out",
               }}>
               {isLoading ? (
                 <CircularProgress size={24} color="inherit" />
@@ -268,28 +337,37 @@ const Login: React.FC = () => {
             "url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundColor: "#f5f5f5",
         }}>
         {/* Overlay with quote */}
         <Box
           sx={{
             position: "absolute",
-            bottom: 60,
-            left: 40,
-            right: 40,
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            bottom: 80,
+            left: 50,
+            right: 50,
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
             color: "white",
-            p: 3,
-            borderRadius: 2,
+            p: 4,
+            borderRadius: 3,
+            backdropFilter: "blur(10px)",
           }}>
-          <Typography variant="h6" sx={{ mb: 1, fontStyle: "italic" }}>
-            "Time and health are two precious assets that we don't recognize and
-            appreciate until they have been depleted"
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 2,
+              fontStyle: "italic",
+              lineHeight: 1.4,
+              fontWeight: 300,
+            }}>
+            "A fit body, a calm mind, a house full of love. These things cannot
+            be bought – they must be earned."
           </Typography>
-          <Typography variant="body1" sx={{ fontWeight: "bold" }}>
-            Marietta Kaufman
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+            Gonzalo Neuman
           </Typography>
-          <Typography variant="body2" sx={{ opacity: 0.8 }}>
-            Proton HealthCare • Obstetrics and Gynecology
+          <Typography variant="body1" sx={{ opacity: 0.9, fontWeight: 500 }}>
+            Proton HealthCare • General Surgery
           </Typography>
         </Box>
 
@@ -297,36 +375,48 @@ const Login: React.FC = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom: 20,
-            right: 40,
+            bottom: 30,
+            right: 50,
             display: "flex",
-            gap: 1,
+            gap: 1.5,
           }}>
           <Box
             sx={{
-              width: 8,
-              height: 8,
+              width: 10,
+              height: 10,
               borderRadius: "50%",
               backgroundColor: "white",
               opacity: 1,
+              cursor: "pointer",
+              transition: "opacity 0.3s ease",
             }}
           />
           <Box
             sx={{
-              width: 8,
-              height: 8,
+              width: 10,
+              height: 10,
               borderRadius: "50%",
               backgroundColor: "white",
               opacity: 0.5,
+              cursor: "pointer",
+              transition: "opacity 0.3s ease",
+              "&:hover": {
+                opacity: 0.8,
+              },
             }}
           />
           <Box
             sx={{
-              width: 8,
-              height: 8,
+              width: 10,
+              height: 10,
               borderRadius: "50%",
               backgroundColor: "white",
-              opacity: 0.5,
+              opacity: 0.7,
+              cursor: "pointer",
+              transition: "opacity 0.3s ease",
+              "&:hover": {
+                opacity: 0.9,
+              },
             }}
           />
         </Box>

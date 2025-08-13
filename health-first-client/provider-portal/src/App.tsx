@@ -1,45 +1,44 @@
-import React from "react";
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { Provider } from "react-redux";
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import { Provider } from "react-redux";
 import { store } from "./store/store";
 
 // Layout Components
-import DashboardLayout from "./components/layout/DashboardLayout";
 import AuthLayout from "./components/layout/AuthLayout";
+import DashboardLayout from "./components/layout/DashboardLayout";
 
 // Auth Components
 import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
 import ProviderSignIn from "./components/auth/ProviderSignIn";
+import Register from "./components/auth/Register";
 
 // Patient Portal Components
-import PatientDashboard from "./components/patient/Dashboard";
 import PatientAppointments from "./components/patient/Appointments";
-import PatientMedicalRecords from "./components/patient/MedicalRecords";
-import PatientPrescriptions from "./components/patient/Prescriptions";
-import PatientLabResults from "./components/patient/LabResults";
 import PatientBilling from "./components/patient/Billing";
+import PatientDashboard from "./components/patient/Dashboard";
+import PatientLabResults from "./components/patient/LabResults";
+import PatientMedicalRecords from "./components/patient/MedicalRecords";
 import PatientMessages from "./components/patient/Messages";
+import PatientPrescriptions from "./components/patient/Prescriptions";
 import PatientProfile from "./components/patient/Profile";
 
 // Provider Portal Components
-import ProviderDashboard from "./components/provider/Dashboard";
-import ProviderPatients from "./components/provider/Patients";
 import ProviderAppointments from "./components/provider/Appointments";
-import ProviderSchedule from "./components/provider/Schedule";
-import ProviderPrescriptions from "./components/provider/Prescriptions";
-import ProviderLabOrders from "./components/provider/LabOrders";
 import ProviderBilling from "./components/provider/Billing";
-import ProviderMessages from "./components/provider/Messages";
-import ProviderSettings from "./components/provider/Settings";
+import ProviderDashboard from "./components/provider/Dashboard";
 import DayWiseAvailability from "./components/provider/DayWiseAvailability";
+import ProviderLabOrders from "./components/provider/LabOrders";
+import ProviderMessages from "./components/provider/Messages";
+import ProviderPatients from "./components/provider/Patients";
+import ProviderPrescriptions from "./components/provider/Prescriptions";
+import ProviderSchedule from "./components/provider/Schedule";
+import ProviderSettings from "./components/provider/Settings";
 
 // Protected Route Component
 import ProtectedRoute from "./components/auth/ProtectedRoute";
