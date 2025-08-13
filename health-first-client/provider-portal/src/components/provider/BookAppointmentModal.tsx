@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,10 @@ import {
   Button,
   Typography,
   InputAdornment,
+  Select,
+  MenuItem,
+  InputLabel,
+  Autocomplete,
 } from "@mui/material";
 import {
   Close,
@@ -37,6 +41,27 @@ interface AppointmentFormData {
   reasonForVisit: string;
 }
 
+interface Patient {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+}
+
+interface Provider {
+  id: string;
+  name: string;
+  specialty: string;
+  email: string;
+}
+
+interface AppointmentType {
+  id: string;
+  name: string;
+  duration: number;
+  basePrice: number;
+}
+
 const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
   open,
   onClose,
@@ -51,6 +76,130 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
     reasonForVisit: "",
   });
 
+  // Mock data - replace with API calls
+  const [patients, setPatients] = useState<Patient[]>([
+    {
+      id: "1",
+      name: "John Smith",
+      email: "john.smith@email.com",
+      phone: "555-0101",
+    },
+    {
+      id: "2",
+      name: "Sarah Johnson",
+      email: "sarah.johnson@email.com",
+      phone: "555-0102",
+    },
+    {
+      id: "3",
+      name: "Michael Brown",
+      email: "michael.brown@email.com",
+      phone: "555-0103",
+    },
+    {
+      id: "4",
+      name: "Emily Davis",
+      email: "emily.davis@email.com",
+      phone: "555-0104",
+    },
+    {
+      id: "5",
+      name: "David Wilson",
+      email: "david.wilson@email.com",
+      phone: "555-0105",
+    },
+  ]);
+
+  const [providers, setProviders] = useState<Provider[]>([
+    {
+      id: "1",
+      name: "Dr. Julie Mark",
+      specialty: "Internal Medicine",
+      email: "julie.mark@clinic.com",
+    },
+    {
+      id: "2",
+      name: "Dr. Smith",
+      specialty: "Cardiology",
+      email: "smith@clinic.com",
+    },
+    {
+      id: "3",
+      name: "Dr. Johnson",
+      specialty: "Dermatology",
+      email: "johnson@clinic.com",
+    },
+    {
+      id: "4",
+      name: "Dr. Williams",
+      specialty: "Pediatrics",
+      email: "williams@clinic.com",
+    },
+  ]);
+
+  const [appointmentTypes, setAppointmentTypes] = useState<AppointmentType[]>([
+    { id: "1", name: "New Patient Visit", duration: 60, basePrice: 200 },
+    { id: "2", name: "Follow-up Visit", duration: 30, basePrice: 150 },
+    { id: "3", name: "Consultation", duration: 45, basePrice: 180 },
+    { id: "4", name: "Emergency Visit", duration: 90, basePrice: 300 },
+    { id: "5", name: "Annual Checkup", duration: 45, basePrice: 175 },
+  ]);
+
+  // Load data when component mounts
+  useEffect(() => {
+    // TODO: Replace with actual API calls
+    // loadPatients();
+    // loadProviders();
+    // loadAppointmentTypes();
+  }, []);
+
+  // API integration functions (to be implemented)
+  const loadPatients = async () => {
+    try {
+      // const response = await fetch('/api/patients');
+      // const data = await response.json();
+      // setPatients(data);
+    } catch (error) {
+      console.error("Error loading patients:", error);
+    }
+  };
+
+  const loadProviders = async () => {
+    try {
+      // const response = await fetch('/api/providers');
+      // const data = await response.json();
+      // setProviders(data);
+    } catch (error) {
+      console.error("Error loading providers:", error);
+    }
+  };
+
+  const loadAppointmentTypes = async () => {
+    try {
+      // const response = await fetch('/api/appointment-types');
+      // const data = await response.json();
+      // setAppointmentTypes(data);
+    } catch (error) {
+      console.error("Error loading appointment types:", error);
+    }
+  };
+
+  const createAppointment = async (appointmentData: any) => {
+    try {
+      // const response = await fetch('/api/appointments', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(appointmentData),
+      // });
+      // const data = await response.json();
+      // console.log('Appointment created:', data);
+    } catch (error) {
+      console.error("Error creating appointment:", error);
+    }
+  };
+
   const handleInputChange = (
     field: keyof AppointmentFormData,
     value: string
@@ -61,10 +210,66 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
     }));
   };
 
+  const handlePatientChange = (patientId: string) => {
+    const patient = patients.find((p) => p.id === patientId);
+    setFormData((prev) => ({
+      ...prev,
+      patientName: patient ? patient.name : "",
+    }));
+  };
+
+  const handleProviderChange = (providerId: string) => {
+    const provider = providers.find((p) => p.id === providerId);
+    setFormData((prev) => ({
+      ...prev,
+      provider: provider ? provider.name : "",
+    }));
+  };
+
+  const handleAppointmentTypeChange = (typeId: string) => {
+    const appointmentType = appointmentTypes.find((t) => t.id === typeId);
+    setFormData((prev) => ({
+      ...prev,
+      appointmentType: appointmentType ? appointmentType.name : "",
+      estimatedAmount: appointmentType
+        ? appointmentType.basePrice.toString()
+        : "",
+    }));
+  };
+
   const handleSubmit = () => {
+    // Get the actual IDs for API submission
+    const patientId = patients.find((p) => p.name === formData.patientName)?.id;
+    const providerId = providers.find((p) => p.name === formData.provider)?.id;
+    const appointmentTypeId = appointmentTypes.find(
+      (t) => t.name === formData.appointmentType
+    )?.id;
+
+    const appointmentData = {
+      ...formData,
+      patientId,
+      providerId,
+      appointmentTypeId,
+    };
+
     // Handle form submission here
-    console.log("Appointment data:", formData);
+    console.log("Appointment data for API:", appointmentData);
+
+    // TODO: Make API call to create appointment
+    // createAppointment(appointmentData);
+
     onClose();
+  };
+
+  // Form validation
+  const isFormValid = () => {
+    return (
+      formData.patientName &&
+      formData.provider &&
+      formData.appointmentType &&
+      formData.dateTime &&
+      formData.reasonForVisit
+    );
   };
 
   return (
@@ -105,21 +310,27 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
       <DialogContent sx={{ pt: 0 }}>
         <Box component="form" sx={{ mt: 2 }}>
           {/* Patient Name */}
-          <TextField
-            fullWidth
-            label="Patient Name"
-            placeholder="Search & Select Patient"
-            value={formData.patientName}
-            onChange={(e) => handleInputChange("patientName", e.target.value)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <KeyboardArrowDown />
-                </InputAdornment>
-              ),
-            }}
-            sx={{ mb: 3 }}
-          />
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel id="patient-select-label">Patient Name</InputLabel>
+            <Select
+              labelId="patient-select-label"
+              value={
+                patients.find((p) => p.name === formData.patientName)?.id || ""
+              }
+              label="Patient Name"
+              onChange={(e) => handlePatientChange(e.target.value)}>
+              {patients.map((patient) => (
+                <MenuItem key={patient.id} value={patient.id}>
+                  <Box>
+                    <Typography variant="body1">{patient.name}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {patient.email} • {patient.phone}
+                    </Typography>
+                  </Box>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           {/* Appointment Mode */}
           <FormControl component="fieldset" sx={{ mb: 3, width: "100%" }}>
@@ -147,40 +358,59 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
           </FormControl>
 
           {/* Provider */}
-          <TextField
-            fullWidth
-            label="Provider"
-            placeholder="Search Provider"
-            value={formData.provider}
-            onChange={(e) => handleInputChange("provider", e.target.value)}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <KeyboardArrowDown />
-                </InputAdornment>
-              ),
-            }}
-            sx={{ mb: 3 }}
-          />
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel id="provider-select-label">Provider</InputLabel>
+            <Select
+              labelId="provider-select-label"
+              value={
+                providers.find((p) => p.name === formData.provider)?.id || ""
+              }
+              label="Provider"
+              onChange={(e) => handleProviderChange(e.target.value)}>
+              {providers.map((provider) => (
+                <MenuItem key={provider.id} value={provider.id}>
+                  <Box>
+                    <Typography variant="body1">{provider.name}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {provider.specialty}
+                    </Typography>
+                  </Box>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           {/* Appointment Type */}
-          <TextField
-            fullWidth
-            label="Appointment Type"
-            placeholder="Select Type"
-            value={formData.appointmentType}
-            onChange={(e) =>
-              handleInputChange("appointmentType", e.target.value)
-            }
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <KeyboardArrowDown />
-                </InputAdornment>
-              ),
-            }}
-            sx={{ mb: 3 }}
-          />
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel id="appointment-type-select-label">
+              Appointment Type
+            </InputLabel>
+            <Select
+              labelId="appointment-type-select-label"
+              value={
+                appointmentTypes.find(
+                  (t) => t.name === formData.appointmentType
+                )?.id || ""
+              }
+              label="Appointment Type"
+              onChange={(e) => handleAppointmentTypeChange(e.target.value)}>
+              {appointmentTypes.map((type) => (
+                <MenuItem key={type.id} value={type.id}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "100%",
+                    }}>
+                    <Typography variant="body1">{type.name}</Typography>
+                    <Typography variant="caption" color="text.secondary">
+                      {type.duration}min • ${type.basePrice}
+                    </Typography>
+                  </Box>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
           {/* Estimated Amount */}
           <TextField
@@ -240,6 +470,7 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <Button
               variant="contained"
               onClick={handleSubmit}
+              disabled={!isFormValid()}
               sx={{
                 bgcolor: "#1976d2",
                 color: "white",
@@ -247,6 +478,10 @@ const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 py: 1.5,
                 "&:hover": {
                   bgcolor: "#1565c0",
+                },
+                "&:disabled": {
+                  bgcolor: "#ccc",
+                  color: "#666",
                 },
               }}>
               Save & Close
